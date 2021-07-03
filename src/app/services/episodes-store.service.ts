@@ -1,7 +1,7 @@
 import { Character } from './../models/data.models';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { Episode, PageInfo } from '../models/data.models';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -52,10 +52,8 @@ export class EpisodesStoreService {
         map((resp) => {
           this.pageInfo = resp.info;
           this.episodes = this.episodes.concat(resp.results);
-        })
-        // catchError((error: any) => {
-        //   // console.log(error);
-        // })
+        }),
+        catchError((error: HttpErrorResponse) => of(error))
       )
       .toPromise();
   }
@@ -73,10 +71,8 @@ export class EpisodesStoreService {
         }),
         map((resp) => {
           this.episodeCharacters = resp;
-        })
-        // catchError((error: any) => {
-        //   // console.log(error);
-        // })
+        }),
+        catchError((error: HttpErrorResponse) => of(error))
       )
       .toPromise();
   }
