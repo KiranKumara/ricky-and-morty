@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { EpisodesStoreService } from '../../services/episodes-store.service';
 
 @Component({
@@ -10,15 +10,13 @@ import { EpisodesStoreService } from '../../services/episodes-store.service';
 export class EpisodeComponent implements OnInit {
   episode$ = this.episodeStore.episode$;
   episodeCharacters$ = this.episodeStore.episodeCharacters$;
+
   constructor(
-    private route: ActivatedRoute,
     private episodeStore: EpisodesStoreService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.episodeStore.getEpisode(this.route.snapshot.params.id);
-  }
+  ngOnInit(): void {}
 
   navigateToCharacter(id: number): void {
     this.router.navigate(['/character', id]);

@@ -24,4 +24,8 @@ export class ApiService {
       `${this.apiUrl}/character/${ids.join(',')}`
     );
   }
+
+  getCharacter(id: number): Observable<Character> {
+    return this.http.get<Character>(`${this.apiUrl}/character/${id}`);
+  }
 }

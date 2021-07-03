@@ -11,9 +11,7 @@ export class EpisodesComponent implements OnInit {
 
   constructor(private episodeStore: EpisodesStoreService) {}
 
-  ngOnInit(): void {
-    this.episodeStore.loadEpisodes();
-  }
+  ngOnInit(): void {}
 
   @HostListener('window:scroll', ['$event'])
   loadMoreEpisodes(event: Event): void {

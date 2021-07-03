@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { Episode, PageInfo } from '../models/data.models';
 import { HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class EpisodesStoreService {
@@ -19,11 +19,15 @@ export class EpisodesStoreService {
 
   private readonly episodeCharactersSub = new BehaviorSubject<Character[]>([]);
 
+  private readonly characterSub = new BehaviorSubject<Character | null>(null);
+
   readonly episodes$ = this.episodesSub.asObservable();
 
   readonly episode$ = this.episodeSub.asObservable();
 
   readonly episodeCharacters$ = this.episodeCharactersSub.asObservable();
+
+  readonly character$ = this.characterSub.asObservable();
 
   get episodes(): Episode[] {
     return this.episodesSub.getValue();
@@ -45,11 +49,15 @@ export class EpisodesStoreService {
     this.episodeCharactersSub.next(val);
   }
 
+  set character(val: Character) {
+    this.characterSub.next(val);
+  }
+
   loadEpisodes(): void {
     this.apiService
       .getEpisodes(this.pageInfo.next)
       .pipe(
-        map((resp) => {
+        tap((resp) => {
           this.pageInfo = resp.info;
           this.episodes = this.episodes.concat(resp.results);
         }),
@@ -71,6 +79,18 @@ export class EpisodesStoreService {
         }),
         map((resp) => {
           this.episodeCharacters = resp;
+        }),
+        catchError((error: HttpErrorResponse) => of(error))
+      )
+      .toPromise();
+  }
+
+  getCharacter(id: number): void {
+    this.apiService
+      .getCharacter(id)
+      .pipe(
+        tap((resp) => {
+          this.character = resp;
         }),
         catchError((error: HttpErrorResponse) => of(error))
       )

@@ -1,1 +1,7 @@
-<p>character works!</p>
+<div>Character Details</div>
+
+<div *ngIf="character$ | async as character">
+  <img [src]="character.image" [alt]="character.name" width="50" height="60" />
+
+  {{ character.name }}
+</div>
