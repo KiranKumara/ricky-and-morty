@@ -1,1 +1,9 @@
-<p>episodes works!</p>
+<div class="episodes" *ngFor="let episode of episodes$ | async">
+  <div nz-row class="row">
+    <div nz-col nzSpan="12">
+      <a [routerLink]="['/episodes', episode.id]"
+        >{{ episode.id }}, {{ episode.name }}</a
+      >
+    </div>
+  </div>
+</div>

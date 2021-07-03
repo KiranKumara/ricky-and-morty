@@ -2,5 +2,12 @@
   <nz-header>
     <h1 nz-typography>Ricky And Morty</h1>
   </nz-header>
-  <nz-content><router-outlet></router-outlet></nz-content>
+  <nz-content>
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a [routerLink]="['/']">Home</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <router-outlet></router-outlet
+  ></nz-content>
 </nz-layout>

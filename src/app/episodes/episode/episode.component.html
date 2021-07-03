@@ -1,0 +1,18 @@
+<div *ngIf="episode$ | async as episode">
+  <h1>Episode Detials</h1>
+  {{ episode.id }}, {{ episode.name }}
+
+  <h1>Characters</h1>
+  <div *ngFor="let character of episodeCharacters$ | async">
+    <div (click)="navigateToCharacter(character.id)">
+      <img
+        [src]="character.image"
+        [alt]="character.name"
+        width="50"
+        height="60"
+      />
+
+      {{ character.name }}
+    </div>
+  </div>
+</div>
