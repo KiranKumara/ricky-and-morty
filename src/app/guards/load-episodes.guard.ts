@@ -11,7 +11,7 @@ export class LoadEpisodesGuard implements CanActivate {
   constructor(private episodesStoreService: EpisodesStoreService) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    this.episodesStoreService.loadEpisodes();
+    this.episodesStoreService.loadEpisodes(false);
     return true;
   }
 }

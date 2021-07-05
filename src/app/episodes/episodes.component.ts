@@ -24,7 +24,7 @@ export class EpisodesComponent implements OnInit {
       document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
     if (pos === max && this.episodeStore.hasMorePage) {
-      this.episodeStore.loadEpisodes();
+      this.episodeStore.loadEpisodes(true);
     }
   }
 

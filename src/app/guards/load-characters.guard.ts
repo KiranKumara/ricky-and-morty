@@ -11,7 +11,7 @@ export class LoadCharactersGuard implements CanActivate {
   constructor(private episodesStoreService: EpisodesStoreService) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    this.episodesStoreService.loadCharacters();
+    this.episodesStoreService.loadCharacters(false);
     return true;
   }
 }

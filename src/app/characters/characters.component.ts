@@ -22,7 +22,7 @@ export class CharactersComponent implements OnInit {
       document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
     if (pos === max && this.episodeStore.hasCharactersMorePage) {
-      this.episodeStore.loadCharacters();
+      this.episodeStore.loadCharacters(true);
     }
   }
 

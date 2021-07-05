@@ -72,13 +72,15 @@ export class EpisodesStoreService {
     this.charactersSub.next(val);
   }
 
-  loadEpisodes(): void {
+  loadEpisodes(loadNextPage: boolean): void {
     this.apiService
-      .getEpisodes(this.episodesPageInfo.next)
+      .getEpisodes(loadNextPage ? this.episodesPageInfo.next : null)
       .pipe(
         tap((resp) => {
           this.episodesPageInfo = resp.info;
-          this.episodes = this.episodes.concat(resp.results);
+          this.episodes = loadNextPage
+            ? this.episodes.concat(resp.results)
+            : resp.results;
         }),
         catchError((error: HttpErrorResponse) => of(error))
       )
@@ -104,13 +106,15 @@ export class EpisodesStoreService {
       .toPromise();
   }
 
-  loadCharacters(): void {
+  loadCharacters(loadNextPage?: boolean): void {
     this.apiService
-      .getCharacters(this.charactersPageInfo.next)
+      .getCharacters(loadNextPage ? this.charactersPageInfo.next : null)
       .pipe(
         tap((resp) => {
           this.charactersPageInfo = resp.info;
-          this.characters = this.characters.concat(resp.results);
+          this.characters = loadNextPage
+            ? this.characters.concat(resp.results)
+            : resp.results;
         }),
         catchError((error: HttpErrorResponse) => of(error))
       )
