@@ -89,7 +89,7 @@ export class EpisodesStoreService {
 
   getEpisode(id: number): void {
     this.apiService
-      .getSingleEpisode(id)
+      .getEpisode(id)
       .pipe(
         mergeMap((resp) => {
           this.episode = resp;

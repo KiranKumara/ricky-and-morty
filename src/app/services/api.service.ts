@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get<EpisodesResponse>(url);
   }
 
-  getSingleEpisode(id: number): Observable<Episode> {
+  getEpisode(id: number): Observable<Episode> {
     return this.http.get<Episode>(`${this.apiUrl}/episode/${id}`);
   }
 
