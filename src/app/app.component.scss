@@ -1,3 +1,6 @@
+@import '../colors';
+@import '../mixins';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -5,6 +8,33 @@
 }
 
 nz-header {
-  background: #fff;
+  background: $bg;
   text-align: center;
+
+  h1 {
+    @include mobile {
+      font-size: 2rem;
+      line-height: inherit;
+    }
+  }
+}
+
+nz-layout {
+  background: $bg;
+}
+
+nz-content {
+  min-height: auto;
+  margin: 1rem;
+}
+
+.links {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+
+  .active {
+    background: lightgray;
+    padding: 0.5rem;
+  }
 }

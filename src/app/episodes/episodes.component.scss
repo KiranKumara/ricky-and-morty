@@ -1,7 +1,13 @@
+@import '../../mixins.scss';
+@include border-list;
 
 :host {
   overflow: auto;
 }
-.row {
-  height: 50px;
+
+nz-list-item-meta {
+  cursor: pointer;
+}
+.bold {
+  font-weight: bold;
 }

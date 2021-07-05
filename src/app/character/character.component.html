@@ -1,7 +1,19 @@
-<div>Character Details</div>
-
-<div *ngIf="character$ | async as character">
-  <img [src]="character.image" [alt]="character.name" width="50" height="60" />
-
-  {{ character.name }}
+<div nz-row class="character" *ngIf="character$ | async as character">
+  <div nz-col nzSpan="4" class="character-image">
+    <img nz-image [nzSrc]="character.image" [alt]="character.name" />
+  </div>
+  <div nz-col nzSpan="18">
+    <ul>
+      <li><span class="bold">Name:</span> {{ character.name }}</li>
+      <li><span class="bold">Gender:</span> {{ character.gender }}</li>
+      <li>
+        <span class="bold">Gender:</span>
+        <span class="status {{ statusClass(character.status) }}"></span
+        >{{ character.status }} - {{ character.species }}
+      </li>
+      <li>
+        <span class="bold">Total Episodes:</span> {{ character.episode.length }}
+      </li>
+    </ul>
+  </div>
 </div>

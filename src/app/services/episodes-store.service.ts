@@ -8,9 +8,12 @@ import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class EpisodesStoreService {
-  pageInfo: PageInfo;
+  episodesPageInfo: PageInfo;
+  charactersPageInfo: PageInfo;
+
   constructor(private apiService: ApiService) {
-    this.pageInfo = {} as PageInfo;
+    this.episodesPageInfo = {} as PageInfo;
+    this.charactersPageInfo = {} as PageInfo;
   }
 
   private readonly episodesSub = new BehaviorSubject<Episode[]>([]);
@@ -18,6 +21,8 @@ export class EpisodesStoreService {
   private readonly episodeSub = new BehaviorSubject<Episode | null>(null);
 
   private readonly episodeCharactersSub = new BehaviorSubject<Character[]>([]);
+
+  private readonly charactersSub = new BehaviorSubject<Character[]>([]);
 
   private readonly characterSub = new BehaviorSubject<Character | null>(null);
 
@@ -29,6 +34,8 @@ export class EpisodesStoreService {
 
   readonly character$ = this.characterSub.asObservable();
 
+  readonly characters$ = this.charactersSub.asObservable();
+
   get episodes(): Episode[] {
     return this.episodesSub.getValue();
   }
@@ -38,7 +45,11 @@ export class EpisodesStoreService {
   }
 
   get hasMorePage(): boolean {
-    return this.pageInfo.next ? true : false;
+    return this.episodesPageInfo.next ? true : false;
+  }
+
+  get hasCharactersMorePage(): boolean {
+    return this.charactersPageInfo.next ? true : false;
   }
 
   set episode(val: Episode) {
@@ -53,12 +64,20 @@ export class EpisodesStoreService {
     this.characterSub.next(val);
   }
 
+  get characters(): Character[] {
+    return this.charactersSub.getValue();
+  }
+
+  set characters(val: Character[]) {
+    this.charactersSub.next(val);
+  }
+
   loadEpisodes(): void {
     this.apiService
-      .getEpisodes(this.pageInfo.next)
+      .getEpisodes(this.episodesPageInfo.next)
       .pipe(
         tap((resp) => {
-          this.pageInfo = resp.info;
+          this.episodesPageInfo = resp.info;
           this.episodes = this.episodes.concat(resp.results);
         }),
         catchError((error: HttpErrorResponse) => of(error))
@@ -75,10 +94,23 @@ export class EpisodesStoreService {
           const ids = resp.characters.map((characterUrl) => {
             return characterUrl.split('/').pop() as string;
           });
-          return this.apiService.getCharacters(ids);
+          return this.apiService.getMultipleCharacters(ids);
         }),
         map((resp) => {
           this.episodeCharacters = resp;
+        }),
+        catchError((error: HttpErrorResponse) => of(error))
+      )
+      .toPromise();
+  }
+
+  loadCharacters(): void {
+    this.apiService
+      .getCharacters(this.charactersPageInfo.next)
+      .pipe(
+        tap((resp) => {
+          this.charactersPageInfo = resp.info;
+          this.characters = this.characters.concat(resp.results);
         }),
         catchError((error: HttpErrorResponse) => of(error))
       )

@@ -1,0 +1,14 @@
+@import '../../mixins.scss';
+
+@include border-list;
+@include character-status;
+
+nz-list-item {
+  nz-list-item-meta {
+    cursor: pointer;
+  }
+  .character-image {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -8,7 +8,17 @@ const routes: Routes = [
       import('./episodes/episodes.module').then((m) => m.EpisodesModule),
   },
   {
-    path: 'character/:id',
+    path: 'episodes/:id',
+    loadChildren: () =>
+      import('./episode/episode.module').then((m) => m.EpisodeModule),
+  },
+  {
+    path: 'characters',
+    loadChildren: () =>
+      import('./characters/characters.module').then((m) => m.CharactersModule),
+  },
+  {
+    path: 'characters/:id',
     loadChildren: () =>
       import('./character/character.module').then((m) => m.CharacterModule),
   },

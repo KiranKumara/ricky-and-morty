@@ -1,0 +1,38 @@
+@mixin border-list {
+  nz-list-item{
+    margin: 0.5rem;
+    border: 1px solid #40a9ff !important;
+    padding: 0.5rem;
+  }
+
+  nz-list {
+    width: 90%;
+    margin: 1rem auto;
+  }
+}
+
+@mixin character-status {
+  .status {
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-right: 0.375rem;
+    font-size: 1rem;
+    display: inline-block;
+    border-radius: 50%;
+
+    &.alive {
+      background: green;
+    }
+    &.dead {
+      background: red;
+    }
+  }
+}
+
+$max-mobile-width: 767px;
+
+@mixin mobile($screen-width: $max-mobile-width) {
+  @media screen and (max-width: $screen-width) {
+    @content;
+  }
+}

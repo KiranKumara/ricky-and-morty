@@ -1,0 +1,30 @@
+<div class="episode-details" *ngIf="episode$ | async as episode">
+  <h1>Episode Detials</h1>
+  <ul>
+    <li><span class="bold">Episode:</span> {{ episode.episode }}</li>
+    <li><span class="bold">Name:</span> {{ episode.name }}</li>
+    <li><span class="bold">Air Date:</span> {{ episode.air_date }}</li>
+  </ul>
+</div>
+
+<nz-divider nzText="Characters in this episode"></nz-divider>
+
+<nz-list>
+  <nz-list-item *ngFor="let character of episodeCharacters$ | async">
+    <ng-container>
+      <nz-list-item-meta
+        [nzAvatar]="character.image"
+        class="character-image"
+        (click)="navigateToCharacter(character.id)"
+      >
+        <nz-list-item-meta-title>
+          {{ character.name }}
+        </nz-list-item-meta-title>
+        <nz-list-item-meta-description>
+          <span class="status {{ statusClass(character.status) }}"></span
+          >{{ character.status }} - {{ character.species }}
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+    </ng-container>
+  </nz-list-item>
+</nz-list>

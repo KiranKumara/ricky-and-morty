@@ -1,9 +1,16 @@
-<div class="episodes" *ngFor="let episode of episodes$ | async">
-  <div nz-row class="row">
-    <div nz-col nzSpan="12">
-      <a [routerLink]="['/episodes', episode.id]"
-        >{{ episode.id }}, {{ episode.name }}</a
-      >
-    </div>
-  </div>
-</div>
+<nz-list>
+  <nz-list-item *ngFor="let episode of episodes$ | async">
+    <ng-container>
+      <nz-list-item-meta (click)="navigateToEpisode(episode.id)">
+        <nz-list-item-meta-title>
+          <span class="bold"
+            >Episode: {{ episode.episode }} {{ episode.name }}</span
+          >
+        </nz-list-item-meta-title>
+        <nz-list-item-meta-description>
+          Air Date: {{ episode.air_date }}
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+    </ng-container>
+  </nz-list-item>
+</nz-list>

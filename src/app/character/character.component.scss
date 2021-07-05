@@ -1,0 +1,37 @@
+@import '../../colors';
+@import '../../mixins';
+
+@include character-status;
+
+.character {
+  width: 90%;
+  margin: 1rem auto;
+  border: 1px solid $main-color;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .character-image  {
+    display: flex;
+    align-items: center;
+    @include mobile {
+      justify-content: center;
+    }
+
+    img {
+      width: 80%;
+
+      @include mobile {
+        height: auto;
+      }
+    }
+  }
+
+  .bold {
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+  ul {
+    list-style: none;
+    padding: 1rem;
+  }
+}

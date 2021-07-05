@@ -1,0 +1,19 @@
+<nz-list>
+  <nz-list-item *ngFor="let character of characters$ | async">
+    <ng-container>
+      <nz-list-item-meta
+        [nzAvatar]="character.image"
+        class="character-image"
+        (click)="navigateToCharacter(character.id)"
+      >
+        <nz-list-item-meta-title>
+          {{ character.name }}
+        </nz-list-item-meta-title>
+        <nz-list-item-meta-description>
+          <span class="status {{ statusClass(character.status) }}"></span
+          >{{ character.status }} - {{ character.species }}
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+    </ng-container>
+  </nz-list-item>
+</nz-list>

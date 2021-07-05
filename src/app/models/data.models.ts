@@ -1,4 +1,4 @@
-enum Status {
+export enum Status {
   Alive = 'Alive',
   Dead = 'Dead',
   unknown = 'unknown',
@@ -41,16 +41,12 @@ export interface PageInfo {
   prev: string | null;
 }
 
-interface EpisodeResult {
-  id: number;
-  name: string;
-  episode: string;
-  characters: string[];
-  url: string;
-  created: string;
-}
-
-export interface EpisodeResponse {
+export interface EpisodesResponse {
   info: PageInfo;
   results: Episode[];
+}
+
+export interface CharactersResponse {
+  info: PageInfo;
+  results: Character[];
 }

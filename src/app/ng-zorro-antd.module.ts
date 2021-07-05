@@ -5,17 +5,17 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-// import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @NgModule({
   exports: [
-    NzBreadCrumbModule,
     NzGridModule,
     NzImageModule,
     NzLayoutModule,
     NzListModule,
-    // NzMenuModule,
+    NzDividerModule,
+    NzSpaceModule,
     NzTypographyModule,
   ],
 })

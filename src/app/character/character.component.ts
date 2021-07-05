@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Status } from '../models/data.models';
 import { EpisodesStoreService } from '../services/episodes-store.service';
 
 @Component({
@@ -12,4 +13,15 @@ export class CharacterComponent implements OnInit {
   constructor(private episodeStore: EpisodesStoreService) {}
 
   ngOnInit(): void {}
+
+  statusClass(status: Status): string {
+    switch (status) {
+      case Status.Alive:
+        return 'alive';
+      case Status.Dead:
+        return 'dead';
+      default:
+        return 'unknown';
+    }
+  }
 }

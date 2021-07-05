@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Episode, EpisodeResponse, Character } from '../models/data.models';
+import {
+  Episode,
+  EpisodesResponse,
+  Character,
+  CharactersResponse,
+} from '../models/data.models';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -10,16 +15,16 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getEpisodes(dynamicUrl: string | null): Observable<EpisodeResponse> {
+  getEpisodes(dynamicUrl: string | null): Observable<EpisodesResponse> {
     const url = dynamicUrl ? dynamicUrl : `${this.apiUrl}/episode`;
-    return this.http.get<EpisodeResponse>(url);
+    return this.http.get<EpisodesResponse>(url);
   }
 
   getSingleEpisode(id: number): Observable<Episode> {
     return this.http.get<Episode>(`${this.apiUrl}/episode/${id}`);
   }
 
-  getCharacters(ids: string[]): Observable<Character[]> {
+  getMultipleCharacters(ids: string[]): Observable<Character[]> {
     return this.http.get<Character[]>(
       `${this.apiUrl}/character/${ids.join(',')}`
     );
@@ -27,5 +32,10 @@ export class ApiService {
 
   getCharacter(id: number): Observable<Character> {
     return this.http.get<Character>(`${this.apiUrl}/character/${id}`);
+  }
+
+  getCharacters(dynamicUrl: string | null): Observable<CharactersResponse> {
+    const url = dynamicUrl ? dynamicUrl : `${this.apiUrl}/character`;
+    return this.http.get<CharactersResponse>(url);
   }
 }

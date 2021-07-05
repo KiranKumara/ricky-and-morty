@@ -1,5 +1,6 @@
 import { EpisodesStoreService } from './../services/episodes-store.service';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-episodes',
@@ -9,7 +10,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class EpisodesComponent implements OnInit {
   episodes$ = this.episodeStore.episodes$;
 
-  constructor(private episodeStore: EpisodesStoreService) {}
+  constructor(
+    private episodeStore: EpisodesStoreService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -22,5 +26,9 @@ export class EpisodesComponent implements OnInit {
     if (pos === max && this.episodeStore.hasMorePage) {
       this.episodeStore.loadEpisodes();
     }
+  }
+
+  navigateToEpisode(id: number): void {
+    this.router.navigate(['/episodes', id]);
   }
 }
