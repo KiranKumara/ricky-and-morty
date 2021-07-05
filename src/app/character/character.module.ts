@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CharacterRoutingModule } from './character-routing.module';
 import { CharacterComponent } from './character.component';
-import { NgZorroAntdModule } from '../ng-zorro-antd.module';
+import { SharedModule } from '../core/shared.moudle';
 
 @NgModule({
   declarations: [CharacterComponent],
-  imports: [CommonModule, CharacterRoutingModule, NgZorroAntdModule],
+  imports: [CommonModule, CharacterRoutingModule, SharedModule],
 })
 export class CharacterModule {}

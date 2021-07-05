@@ -8,7 +8,7 @@
       <li><span class="bold">Gender:</span> {{ character.gender }}</li>
       <li>
         <span class="bold">Gender:</span>
-        <span class="status {{ statusClass(character.status) }}"></span
+        <span class="status" [appCharacterStatus]="character.status"></span
         >{{ character.status }} - {{ character.species }}
       </li>
       <li>

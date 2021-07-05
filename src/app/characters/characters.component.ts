@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Status } from '../models/data.models';
 import { EpisodesStoreService } from '../services/episodes-store.service';
 
 @Component({
@@ -29,16 +28,5 @@ export class CharactersComponent implements OnInit {
 
   navigateToCharacter(id: number): void {
     this.router.navigate(['/characters', id]);
-  }
-
-  statusClass(status: Status): string {
-    switch (status) {
-      case Status.Alive:
-        return 'alive';
-      case Status.Dead:
-        return 'dead';
-      default:
-        return 'unknown';
-    }
   }
 }

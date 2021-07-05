@@ -10,7 +10,7 @@
           {{ character.name }}
         </nz-list-item-meta-title>
         <nz-list-item-meta-description>
-          <span class="status {{ statusClass(character.status) }}"></span
+          <span class="status" [appCharacterStatus]="character.status"></span
           >{{ character.status }} - {{ character.species }}
         </nz-list-item-meta-description>
       </nz-list-item-meta>
